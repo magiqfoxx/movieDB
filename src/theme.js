@@ -1,0 +1,9 @@
+const theme = {
+  sideNavBar: "#001e2d",
+  sideNavBarHover: "#001b29",
+  fontColor: "#31475f",
+  primaryColor: "#c4ca18",
+  lightBackground: "#f6f7f9",
+};
+
+export default theme;
