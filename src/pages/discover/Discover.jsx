@@ -27,15 +27,16 @@ const Discover = () => {
   }, []);
   useEffect(() => {
     if (state.query) {
-      searchMoviesFromApi(state.query).then((data) => {
-        console.log(data);
-        dispatch({
-          type: "setSearchedMovies",
-          payload: data,
-        });
-      });
+      searchMoviesFromApi(state.query, state.year, state.language).then(
+        (data) => {
+          dispatch({
+            type: "setSearchedMovies",
+            payload: data,
+          });
+        }
+      );
     }
-  }, [state.query, dispatch]);
+  }, [state.query, state.year, state.language, dispatch]);
 
   // TODO: Preload and set the popular movies and movie genres when page loads
 

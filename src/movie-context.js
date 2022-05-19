@@ -22,6 +22,9 @@ const movieReducer = (state, action) => {
     case "setQuery": {
       return { ...state, query: action.payload };
     }
+    case "setYear": {
+      return { ...state, year: action.payload };
+    }
     case "setSearchedMovies": {
       return { ...state, movies: action.payload };
     }

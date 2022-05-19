@@ -14,20 +14,22 @@ export const getMovieFromApi = (movieId1) => {
     });
 };
 
-export const searchMoviesFromApi = (query) => {
-  return (
-    query &&
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie/?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`
-      )
-      .then(function (response) {
-        return response.data.results;
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-  );
+export const searchMoviesFromApi = (
+  query,
+  year,
+  language = "en-US",
+  page = 1
+) => {
+  return axios
+    .get(
+      `https://api.themoviedb.org/3/search/movie/?api_key=${api_key}&language=${language}&query=${query}&page=${page}&year=${year}&include_adult=false`
+    )
+    .then(function (response) {
+      return response.data.results;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
 export const getGenresFromApi = () => {
