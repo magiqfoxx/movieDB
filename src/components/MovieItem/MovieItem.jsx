@@ -16,7 +16,6 @@ import {
 
 export default function MovieItem({ movie }) {
   return (
-    // TODO: Complete the MovieItem component
     <MovieItemWrapper>
       <LeftCont>
         <Image
@@ -30,7 +29,7 @@ export default function MovieItem({ movie }) {
           <Vote>{movie.vote_average}</Vote>
         </Top>
         <Genres>
-          {movie.genres.map((genre, i) => (
+          {movie.genres?.map((genre, i) => (
             <Genre key={genre.id}>
               {genre.name}
               {i < movie.genres.length - 1 && " | "}

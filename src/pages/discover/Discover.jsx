@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useMovie } from "../../movie-context";
 
-import SearchFilters from "../../components/searchfilter";
+import SearchFilters from "../../components/SearchFilters";
 import MovieList from "../../components/MovieList";
 
 import {
@@ -12,51 +12,45 @@ import {
   MovieFilters,
   MovieResults,
 } from "./styled";
+import { searchMoviesFromApi, getGenresFromApi } from "../../fetcher";
 
-const ratingOptions = [
-  { id: 7.5, name: 7.5 },
-  { id: 8, name: 8 },
-  { id: 8.5, name: 8.5 },
-  { id: 9, name: 9 },
-  { id: 9.5, name: 9.5 },
-  { id: 10, name: 10 },
-];
-const languageOptions = [
-  { id: "GR", name: "Greek" },
-  { id: "EN", name: "English" },
-  { id: "RU", name: "Russian" },
-  { id: "PO", name: "Polish" },
-];
 const Discover = () => {
-  const { state } = useMovie();
-  // const [state1, setState1] = useState({
-  //   keyword: "",
-  //   year: 0,
-  //   results: [],
-  //   totalCount: 0,
-  //   genreOptions: [],
-  // });
+  const { state, dispatch } = useMovie();
+
+  useEffect(() => {
+    getGenresFromApi(state.query).then((data) => {
+      dispatch({
+        type: "setGenres",
+        payload: data,
+      });
+    });
+  }, []);
+  useEffect(() => {
+    if (state.query) {
+      searchMoviesFromApi(state.query).then((data) => {
+        console.log(data);
+        dispatch({
+          type: "setSearchedMovies",
+          payload: data,
+        });
+      });
+    }
+  }, [state.query]);
+
   // TODO: Preload and set the popular movies and movie genres when page loads
 
   // TODO: Update search results based on the keyword and year inputs
 
-  // const {
-  //   genreOptions,
-  //   languageOptions,
-  //   ratingOptions,
-  //   totalCount,
-  //   results,
-  // } = this.state;
   return (
     <DiscoverWrapper>
       <MobilePageTitle>Discover</MobilePageTitle>{" "}
       {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
-      <TotalCount>{state.movies.length} results</TotalCount>
+      <TotalCount>{state.movies ? state.movies.length : 0} results</TotalCount>
       <MovieFilters>
         <SearchFilters
           genres={state.genres}
-          ratings={ratingOptions}
-          languages={languageOptions}
+          ratings={state.ratingOptions}
+          languages={state.languageOptions}
           searchMovies={(keyword, year) => this.searchMovies(keyword, year)}
         />
       </MovieFilters>

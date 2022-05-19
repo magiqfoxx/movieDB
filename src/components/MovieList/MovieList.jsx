@@ -19,7 +19,7 @@ export default function MovieList() {
 
   return (
     <MoviesWrapper>
-      {state.movies.map((movie) => (
+      {state.movies?.map((movie) => (
         <MovieItem key={movie.id} movie={movie} />
       ))}
     </MoviesWrapper>
