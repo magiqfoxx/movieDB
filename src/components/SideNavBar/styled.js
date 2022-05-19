@@ -10,8 +10,16 @@ export const SideNavBarCont = styled.div`
   height: 100%;
   background-color: ${colors.sideNavBar};
   color: white;
+  @media only screen and (max-width: 800px) {
+    visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  }
 `;
-
+export const HamburgerMenu = styled.div`
+  visibility: hidden;
+  @media only screen and (max-width: 800px) {
+    visibility: visible;
+  }
+`;
 export const SectionsStyles = css`
   position: relative;
   display: flex;

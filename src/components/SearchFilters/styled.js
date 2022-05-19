@@ -9,6 +9,9 @@ export const SearchFiltersCont = styled.div`
   padding: 20px;
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
+  @media only screen and (max-width: 800px) {
+    background-color: transparent;
+  }
 
   .search_bar_wrapper:first-child {
     margin-bottom: 15px;
@@ -19,6 +22,12 @@ export const SearchFiltersCont = styled.div`
     css`
       margin-bottom: 15px;
     `}
+`;
+export const SearchFiltersContBottom = styled.div`
+  ${SearchFiltersCont}
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 export const CategoryTitle = styled.h3`

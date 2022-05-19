@@ -6,6 +6,7 @@ import YearIcon from "../../images/year-icon.png";
 import {
   FiltersWrapper,
   SearchFiltersCont,
+  SearchFiltersContBottom,
   CategoryTitle,
   Button,
 } from "./styled";
@@ -37,7 +38,7 @@ export default function SearchFilters() {
           }
         />
       </SearchFiltersCont>
-      <SearchFiltersCont>
+      <SearchFiltersContBottom>
         <CategoryTitle>Movies</CategoryTitle>
         {state.genres && (
           <AccordionFilter title="genre(s)" options={state.genres} />
@@ -49,7 +50,7 @@ export default function SearchFilters() {
           <AccordionFilter title="language" options={state.languages} />
         )}
         <Button onClick={() => dispatch({ type: "getMovie" })}>Search</Button>
-      </SearchFiltersCont>
+      </SearchFiltersContBottom>
     </FiltersWrapper>
   );
 }

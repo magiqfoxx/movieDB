@@ -30,8 +30,11 @@ function App() {
 
 export default App;
 
-const ContentWrapper = styled.main`
+const ContentWrapper = styled.div`
   padding-left: 280px;
+  @media only screen and (max-width: 800px) {
+    padding-left: 0px;
+  }
 `;
 
 const PageContainer = styled.main`
