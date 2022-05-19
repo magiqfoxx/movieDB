@@ -35,7 +35,7 @@ const Discover = () => {
         });
       });
     }
-  }, [state.query]);
+  }, [state.query, dispatch]);
 
   // TODO: Preload and set the popular movies and movie genres when page loads
 

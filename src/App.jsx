@@ -8,13 +8,8 @@ import theme from "./theme";
 
 import "./css/app.scss";
 import { MovieProvider } from "./movie-context";
-import { getGenres } from "./fetcher";
 
 function App() {
-  useEffect(() => {
-    //getGenres();
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <MovieProvider>

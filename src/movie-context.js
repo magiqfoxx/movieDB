@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import { searchMoviesFromApi, getGenresFromApi } from "./fetcher";
-
 const MovieContext = React.createContext(undefined);
 
 const ratings = [
@@ -25,7 +23,6 @@ const movieReducer = (state, action) => {
       return { ...state, query: action.payload };
     }
     case "setSearchedMovies": {
-      //debugger;
       return { ...state, movies: action.payload };
     }
     case "setLoading": {
@@ -34,6 +31,10 @@ const movieReducer = (state, action) => {
     case "setGenres": {
       return { ...state, genres: action.payload };
     }
+    case "setFilter": {
+      return { ...state, filters: action.payload };
+    }
+
     default: {
       throw new Error(`Unhandled action type`);
     }
@@ -50,24 +51,6 @@ const MovieProvider = ({ children }) => {
   });
   const value = { state, dispatch };
 
-  // React.useEffect(() => {
-  //   const getGenres = async () => {
-  //     value.dispatch({ type: "setLoading", payload: true });
-  //     const data = await getGenresFromApi();
-  //     value.dispatch({ type: "setSearchedMovies", payload: data });
-  //     value.dispatch({ type: "setLoading", payload: false });
-  //   };
-  //   getGenres();
-  // }, []);
-  // const getMovies = async () => {
-  //   value.dispatch({ type: "setLoading", payload: true });
-  //   const data = await searchMoviesFromApi(value.state.query);
-  //   value.dispatch({ type: "setSearchedMovies", payload: data });
-  //   value.dispatch({ type: "setLoading", payload: false });
-  // };
-  // React.useEffect(() => {
-  //   getMovies();
-  // }, [value.state.query]);
   return (
     <MovieContext.Provider value={value}>{children}</MovieContext.Provider>
   );
@@ -76,7 +59,7 @@ const MovieProvider = ({ children }) => {
 const useMovie = () => {
   const context = React.useContext(MovieContext);
   if (context === undefined) {
-    throw new Error("useCount must be used within a CountProvider");
+    throw new Error("useMovie must be used within a MovieProvider");
   }
   return context;
 };
